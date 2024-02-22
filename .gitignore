@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/grading_tab/.vs/grading_tab
+/grading_tab/obj
+/grading_tab.domain/obj
+/web_api/bin/Debug/net8.0
+/web_api/obj
+/grading_tab.v3.ncrunchsolution.user
+/web_api
+/grading_tab
