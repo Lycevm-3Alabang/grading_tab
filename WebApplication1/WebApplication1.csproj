@@ -20,4 +20,8 @@
     <ProjectReference Include="..\grading_tab.infrastructure\grading_tab.infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Application\" />
+  </ItemGroup>
+
 </Project>

@@ -1,0 +1,6 @@
+@grading_tab_HostAddress = http://localhost:5241
+
+GET {{grading_tab_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
