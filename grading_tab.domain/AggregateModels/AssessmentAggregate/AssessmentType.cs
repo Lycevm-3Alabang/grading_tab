@@ -1,6 +1,4 @@
-﻿
-using grading_tab.domain.AggregateModels.SectionAggregate;
-using grading_tab.domain.SeedWork;
+﻿using grading_tab.domain.SeedWork;
 
 namespace grading_tab.domain.AggregateModels.AssessmentAggregate
 {
@@ -22,35 +20,5 @@ namespace grading_tab.domain.AggregateModels.AssessmentAggregate
                 new (6,"Major Exam")
             ];
         
-    }
-
-    public class GradingPeriod : Enumeration
-    {
-        public GradingPeriod(int id, string name) : base(id, name)
-        {
-        }
-
-        public static IEnumerable<GradingPeriod> Seed() => 
-            [
-                new(1,"PRELIM"),
-                new(2,"MIDTERM"),
-                new(3,"PREFINAL"),
-                new(4,"FINAL"),
-            ];
-    }
-
-    public class Assessment : Entity
-    {
-        public DateTimeOffset AssessmentDate { get; private set; }
-        public decimal Score { get; private set; }
-
-        private int _assessmentTypeId;
-        public AssessmentType AssessmentType { get; private set; }
-
-        private Guid _studentId;
-        public Student Student { get; private set; }
-
-        public int _gradingPeriodId;
-        public GradingPeriod GradingPeriod { get; private set;}
     }
 }

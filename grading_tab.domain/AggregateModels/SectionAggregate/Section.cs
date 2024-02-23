@@ -1,4 +1,5 @@
-﻿using grading_tab.domain.SeedWork;
+﻿using grading_tab.domain.AggregateModels.PersonAggregate;
+using grading_tab.domain.SeedWork;
 using System.Collections.ObjectModel;
 
 namespace grading_tab.domain.AggregateModels.SectionAggregate
@@ -7,24 +8,24 @@ namespace grading_tab.domain.AggregateModels.SectionAggregate
     {
         public string? Name { get; private set; }
 
-        private List<Student>? _students;
-        public ReadOnlyCollection<Student> Students => _students.AsReadOnly();
+        private List<Person>? _students;
+        public ReadOnlyCollection<Person> Students => _students!.AsReadOnly();
 
 
-        private Section()
+        protected Section()
         {
-            _students = new List<Student>();
+            _students = [];
         }
 
-        public Section(string? name) : this() { }
-        
-    }
+        public Section(string? name) : this() { }        
 
-    public interface ISectionRepository : IRepository<Section>
-    {
-        Section Create(Section section);
-        Section Update(Section section);
+        public void AddStudent(Person student)
+        {
+            if (_students == null) _students = new();
+            _students.Add(student);
+        }
 
+        public void RemoveStudent(Person student) => _students!.Remove(student);
     }
     
 }
