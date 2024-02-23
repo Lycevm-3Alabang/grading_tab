@@ -3,7 +3,6 @@ using grading_tab.domain.AggregateModels.PersonAggregate;
 using grading_tab.domain.AggregateModels.SectionAggregate;
 using grading_tab.domain.SeedWork;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
 namespace grading_tab.infrastructure
@@ -29,26 +28,6 @@ namespace grading_tab.infrastructure
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(GradingTabContext).Assembly);
 
-        }
-    }
-
-    public class CatalogDbContextDesignFactory : IDesignTimeDbContextFactory<GradingTabContext>
-    {
-        private readonly IConfiguration _configuration;
-
-        public CatalogDbContextDesignFactory(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
-
-        public GradingTabContext CreateDbContext(string[] args)
-        {
-            var connectionString = _configuration["ConnectionStrings:Default"];
-
-            var optionsBuilder = new DbContextOptionsBuilder<GradingTabContext>()
-           .UseSqlServer(connectionString, x => x.MigrationsAssembly(typeof(GradingTabContext).Assembly.FullName));
-
-            return new GradingTabContext(optionsBuilder.Options);
         }
     }
 }

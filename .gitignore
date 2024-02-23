@@ -15,3 +15,5 @@
 /grading_tab.infrastructure/obj
 /grading_tab.infrastructure/bin/Debug/net8.0
 /WebApplication1/obj
+.idea/.idea.grading_tab/.idea/vcs.xml
+*.xml

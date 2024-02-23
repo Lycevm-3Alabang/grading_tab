@@ -12,14 +12,14 @@ namespace grading_tab.domain.AggregateModels.AssessmentAggregate
         public int TotalItems { get; private set; }
         public decimal Grade { get; private set; }
 
-        private int _assessmentTypeId;
-        public AssessmentType? AssessmentType { get; private set; }
+        private int _typeId;
+        public AssessmentType? Type { get; private set; }
 
-        private Guid? _studentId;
+        private Guid _studentId;
         public Person? Student { get; private set; }
 
-        public int _gradingPeriodId;
-        public Term? GradingPeriod { get; private set;}
+        public int _termId;
+        public Term? Term { get; private set;}
 
         public int _subjectId;
         public Subject? Subject { get; private set; }
@@ -29,13 +29,13 @@ namespace grading_tab.domain.AggregateModels.AssessmentAggregate
             
         }
 
-        public AssessmentResult(DateTimeOffset assessmentDate, int score, int totalItems, decimal grade, int assessmentTypeId, Guid studentId, int gradingPeriodId, int subjectId)
+        public AssessmentResult(DateTimeOffset assessmentDate, int score, int totalItems, decimal grade, int typeId, Guid studentId, int termId, int subjectId)
         {
             AssessmentDate = assessmentDate;
             Score = score;
-            _assessmentTypeId = assessmentTypeId;
+            _typeId = typeId;
             _studentId = studentId;
-            _gradingPeriodId = gradingPeriodId;
+            _termId = termId;
             _subjectId = subjectId;
             TotalItems = totalItems;
             Grade = grade;
