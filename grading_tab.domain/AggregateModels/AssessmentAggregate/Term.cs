@@ -10,10 +10,10 @@ namespace grading_tab.domain.AggregateModels.AssessmentAggregate
 
         public static IEnumerable<Term> Seed() => 
             [
-                new(1,"PRELIM"),
-                new(2,"MIDTERM"),
-                new(3,"PREFINAL"),
-                new(4,"FINAL"),
+                new Term(1,"PRELIM"),
+                new Term(2,"MIDTERM"),
+                new Term(3,"PRE-FINAL"),
+                new Term(4,"FINAL"),
             ];
     }
 }

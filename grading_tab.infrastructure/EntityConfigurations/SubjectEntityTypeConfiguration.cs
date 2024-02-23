@@ -10,7 +10,10 @@ public class SubjectEntityTypeConfiguration : IEntityTypeConfiguration<Subject>
     {
         builder.ToTable("subject", "dbo");
         builder.HasKey(x => x.Id);
+        // builder.Property(o => o.Id)
+        //     .UseHiLo("subject_seq", "dbo");
         builder.HasIndex(x => x.Name).IsUnique();
         builder.Property(x => x.Name).IsRequired();
+        builder.HasData(Subject.Seed());
     }
 }
