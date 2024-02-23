@@ -14,8 +14,8 @@ namespace grading_tab.infrastructure.EntityConfigurations
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Number).IsRequired();
             builder.HasIndex(x => x.Number).IsUnique();
-
-            builder.Property<Guid>("PersonId");
+            builder.Property<Guid>("SectionId");
+           
         }
     }
 
@@ -25,6 +25,7 @@ namespace grading_tab.infrastructure.EntityConfigurations
         {
             builder.ToTable("section", "dbo");
             builder.HasKey(x => x.Id);
+            builder.HasMany(x => x.Students).WithOne();
         }
     }
 
@@ -39,22 +40,36 @@ namespace grading_tab.infrastructure.EntityConfigurations
         }
     }
 
-    public class SessionTypeEntityTypeConfiguration : IEntityTypeConfiguration<MeetingType>
+    public class MeetingTypeEntityTypeConfiguration : IEntityTypeConfiguration<MeetingType>
     {
         public void Configure(EntityTypeBuilder<MeetingType> builder)
         {
-            builder.ToTable("session_type", "dbo");
+            builder.ToTable("meeting_type", "dbo");
             builder.HasKey(x => x.Id);
             builder.HasIndex(x => x.Name).IsUnique();
             builder.Property(x => x.Name).IsRequired();
         }
     }
 
-    public class FacultyLoadEntityTypeConfiguration : IEntityTypeConfiguration<SubjectLoad>
+    public class MeetingEntityTypeConfiguration : IEntityTypeConfiguration<Meeting>
+    {
+        public void Configure(EntityTypeBuilder<Meeting> builder)
+        {
+            builder.ToTable("meeting", "dbo");
+            builder.HasKey(x => x.Id);
+
+            builder.Property("_typeId").HasColumnName("TypeId");
+            builder.HasOne(x => x.Type).WithMany().HasForeignKey("_typeId");
+
+            
+        }
+    }
+
+    public class SubjectLoadEntityTypeConfiguration : IEntityTypeConfiguration<SubjectLoad>
     {
         public void Configure(EntityTypeBuilder<SubjectLoad> builder)
         {
-            builder.ToTable("faculty_load", "dbo");
+            builder.ToTable("subject_load", "dbo");
             builder.HasKey(x => x.Id);
 
             builder.Property("_sectionId").HasColumnName("SectionId");
@@ -66,8 +81,7 @@ namespace grading_tab.infrastructure.EntityConfigurations
             builder.Property("_facultyId").HasColumnName("FacultyId");
             builder.HasOne(x => x.Section).WithMany().HasForeignKey("_facultyId");
 
-            builder.Property("_onlineId").HasColumnName("OnlineSessionTypeId");
-            builder.HasOne(x => x.Section).WithMany().HasForeignKey("_sectionId");
+            builder.HasMany(x => x.Meetings).WithOne();
         }
     }
 }

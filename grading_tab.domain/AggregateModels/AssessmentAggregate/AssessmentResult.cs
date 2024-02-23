@@ -13,16 +13,16 @@ namespace grading_tab.domain.AggregateModels.AssessmentAggregate
         public decimal Grade { get; private set; }
 
         private int _assessmentTypeId;
-        public AssessmentType AssessmentType { get; private set; }
+        public AssessmentType? AssessmentType { get; private set; }
 
-        private Guid _studentId;
-        public Person Student { get; private set; }
+        private Guid? _studentId;
+        public Person? Student { get; private set; }
 
         public int _gradingPeriodId;
-        public Term GradingPeriod { get; private set;}
+        public Term? GradingPeriod { get; private set;}
 
         public int _subjectId;
-        public Subject Subject { get; private set; }
+        public Subject? Subject { get; private set; }
 
         public AssessmentResult()
         {
