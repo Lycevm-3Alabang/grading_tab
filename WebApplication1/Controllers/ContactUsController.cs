@@ -10,5 +10,6 @@ namespace WebApplication1.Controllers
         }
 
         public string Hello() => "Hello World!";
+        public string HelloFromMain() => "Hello world from (main) branch";
     }
 }
