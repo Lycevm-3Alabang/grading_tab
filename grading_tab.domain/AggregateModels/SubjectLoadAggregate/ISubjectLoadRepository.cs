@@ -1,6 +1,6 @@
 ﻿using grading_tab.domain.SeedWork;
 
-namespace grading_tab.domain.AggregateModels.SectionAggregate
+namespace grading_tab.domain.AggregateModels.SubjectLoadAggregate
 {
     public interface ISubjectLoadRepository : IRepository<SubjectLoad>
     {

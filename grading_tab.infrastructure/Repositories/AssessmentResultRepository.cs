@@ -1,20 +1,32 @@
 ﻿using grading_tab.domain.AggregateModels.AssessmentAggregate;
 using grading_tab.domain.SeedWork;
+using Microsoft.EntityFrameworkCore;
 
 namespace grading_tab.infrastructure.Repositories
 {
     public class AssessmentResultRepository : IAssessmentResultRepository
     {
-        public IUnitOfWork UnitOfWork => throw new NotImplementedException();
+        public GradingTabContext _dbContext;
+        public IUnitOfWork UnitOfWork => _dbContext;
+
+        public AssessmentResultRepository(GradingTabContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
 
         public AssessmentResult Create(AssessmentResult result)
         {
-            throw new NotImplementedException();
+            return _dbContext.AssessmentResults.Add(result).Entity;
         }
 
-        public Task<IEnumerable<AssessmentResult>> GetAllAsync()
+        public async Task<IEnumerable<AssessmentResult>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext.AssessmentResults
+                .Include(x => x.Student)
+                .Include(x => x.Subject)
+                .Include(x => x.Term)
+                .Include(x => x.Type)
+                .ToArrayAsync() ?? [];
         }
 
         public Task<AssessmentResult> GetByIdAsync(Guid id)

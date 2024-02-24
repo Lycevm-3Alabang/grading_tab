@@ -1,6 +1,6 @@
 ﻿using grading_tab.domain.SeedWork;
 
-namespace grading_tab.domain.AggregateModels.FacultyLoadAggregate
+namespace grading_tab.domain.AggregateModels.SubjectLoadAggregate
 {
     public class MeetingType : Enumeration
     {

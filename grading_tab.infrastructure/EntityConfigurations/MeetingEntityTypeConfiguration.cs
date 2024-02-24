@@ -1,4 +1,4 @@
-using grading_tab.domain.AggregateModels.FacultyLoadAggregate;
+using grading_tab.domain.AggregateModels.SubjectLoadAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

@@ -1,7 +1,7 @@
 ﻿using grading_tab.domain.AggregateModels.AssessmentAggregate;
-using grading_tab.domain.AggregateModels.FacultyLoadAggregate;
 using grading_tab.domain.AggregateModels.PersonAggregate;
 using grading_tab.domain.AggregateModels.SectionAggregate;
+using grading_tab.domain.AggregateModels.SubjectLoadAggregate;
 using grading_tab.domain.SeedWork;
 using Microsoft.EntityFrameworkCore;
 
