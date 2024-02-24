@@ -4,6 +4,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace grading_tab.infrastructure.EntityConfigurations;
 
+public class AssessmentTypeEntityTypeConfiguration : IEntityTypeConfiguration<AssessmentType>
+{
+    public void Configure(EntityTypeBuilder<AssessmentType> builder)
+    {
+        builder.ToTable("assessment_type", "dbo");
+        builder.HasKey(x => x.Id);
+    }
+}
 public class AssessmentResultEntityTypeConfiguration : IEntityTypeConfiguration<AssessmentResult>
 {
     public void Configure(EntityTypeBuilder<AssessmentResult> builder)

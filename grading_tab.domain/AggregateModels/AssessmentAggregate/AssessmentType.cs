@@ -7,9 +7,6 @@ namespace grading_tab.domain.AggregateModels.AssessmentAggregate
         public AssessmentType(int id, string name) : base(id, name)
         {
         }
-
-        public decimal Percentage { get; private set; }
-
         public static IEnumerable<AssessmentType> Seed() =>
             [
                 new (1,"Attendance"),
