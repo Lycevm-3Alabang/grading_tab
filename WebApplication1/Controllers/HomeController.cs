@@ -20,7 +20,7 @@ namespace WebApplication1.Controllers
 
         public string Test()
         {
-            return "Hello World!";
+            return "Hello World!!!!!!!!";
         }
 
         public IActionResult Privacy()
