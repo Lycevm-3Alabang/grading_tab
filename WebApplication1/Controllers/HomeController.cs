@@ -18,6 +18,11 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        public string Test()
+        {
+            return "Hello World!";
+        }
+
         public IActionResult Privacy()
         {
             return View();
