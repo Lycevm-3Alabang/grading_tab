@@ -17,7 +17,7 @@ namespace grading_tab.domain.AggregateModels.SubjectLoadAggregate
         public Section? Section { get; private set; }
         public Subject? Subject { get; private set; }
         public Person? Faculty { get; private set; }
-        public ReadOnlyCollection<Meeting> Meetings => _meetings!.AsReadOnly();
+        public IEnumerable<Meeting> Meetings => _meetings!.AsReadOnly();
         
 
         public SubjectLoad(Guid facultyId, Guid sectionId, int subjectId) : base()
