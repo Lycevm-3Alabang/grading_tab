@@ -1,27 +1,22 @@
 ﻿using grading_tab.domain.AggregateModels.AssessmentAggregate;
+using grading_tab.domain.AggregateModels.AssessmentResultAggregate;
 using grading_tab.domain.SeedWork;
 using Microsoft.EntityFrameworkCore;
 
 namespace grading_tab.infrastructure.Repositories
 {
-    public class AssessmentResultRepository : IAssessmentResultRepository
+    public class AssessmentResultRepository(GradingTabContext dbContext) : IAssessmentResultRepository
     {
-        public GradingTabContext _dbContext;
-        public IUnitOfWork UnitOfWork => _dbContext;
-
-        public AssessmentResultRepository(GradingTabContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
+        public IUnitOfWork UnitOfWork => dbContext;
 
         public AssessmentResult Create(AssessmentResult result)
         {
-            return _dbContext.AssessmentResults.Add(result).Entity;
+            return dbContext.AssessmentResults.Add(result).Entity;
         }
 
         public async Task<IEnumerable<AssessmentResult>> GetAllAsync()
         {
-            return await _dbContext.AssessmentResults
+            return await dbContext.AssessmentResults
                 .Include(x => x.Student)
                 .Include(x => x.Subject)
                 .Include(x => x.Term)
@@ -29,14 +24,19 @@ namespace grading_tab.infrastructure.Repositories
                 .ToArrayAsync() ?? [];
         }
 
-        public Task<AssessmentResult> GetByIdAsync(Guid id)
+        public async Task<AssessmentResult?> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await dbContext.AssessmentResults
+                .Include(x => x.Student)
+                .Include(x => x.Subject)
+                .Include(x => x.Term)
+                .Include(x => x.Type)
+                .SingleOrDefaultAsync();
         }
 
         public AssessmentResult Update(AssessmentResult result)
         {
-            throw new NotImplementedException();
+            return dbContext.AssessmentResults.Update(result).Entity;
         }
     }
 }

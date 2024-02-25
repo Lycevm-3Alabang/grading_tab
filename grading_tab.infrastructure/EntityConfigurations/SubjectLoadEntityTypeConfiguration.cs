@@ -13,35 +13,50 @@ public class SubjectLoadEntityTypeConfiguration : IEntityTypeConfiguration<Subje
         builder.ToTable("subject_load", "dbo");
         builder.HasKey(x => x.Id);
 
-        builder.Property<Guid>("_sectionId")
-            .UsePropertyAccessMode(PropertyAccessMode.Field)
-            .HasColumnName("SectionId")
-            .IsRequired();
+        builder.Property("_sectionId").HasColumnName("SectionId");
+        builder.HasOne(x => x.Section)
+            .WithMany()
+            .HasForeignKey("_sectionId");
+        
+        builder.Property("_subjectId").HasColumnName("SubjectId");
+        builder.HasOne(x => x.Subject)
+            .WithMany()
+            .HasForeignKey("_subjectId");
+        
+        builder.Property("_facultyId").HasColumnName("FacultyId");
+        builder.HasOne(x => x.Faculty)
+            .WithMany()
+            .HasForeignKey("_facultyId");
 
-        builder.HasOne<Section>()
-            .WithMany()
-            .HasForeignKey("_sectionId")
-            .OnDelete(DeleteBehavior.NoAction);;
+        // builder.Property<Guid>("_sectionId")
+        //     .UsePropertyAccessMode(PropertyAccessMode.Field)
+        //     .HasColumnName("SectionId")
+        //     .IsRequired();
+        //
+        // builder.HasOne<Section>()
+        //     .WithMany()
+        //     .HasForeignKey("_sectionId")
+        //     .OnDelete(DeleteBehavior.NoAction);;
         
-        builder.Property<int>("_subjectId")
-            .UsePropertyAccessMode(PropertyAccessMode.Field)
-            .HasColumnName("SubjectId")
-            .IsRequired();
+        // builder.Property<int>("_subjectId")
+        //     .UsePropertyAccessMode(PropertyAccessMode.Field)
+        //     .HasColumnName("SubjectId")
+        //     .IsRequired();
+        //
+        // builder.HasOne<Subject>()
+        //     .WithMany()
+        //     .HasForeignKey("_subjectId")
+        //     .OnDelete(DeleteBehavior.Restrict);
         
-        builder.HasOne<Subject>()
-            .WithMany()
-            .HasForeignKey("_subjectId")
-            .OnDelete(DeleteBehavior.Restrict);
-        
-        builder.Property<Guid>("_facultyId")
-            .UsePropertyAccessMode(PropertyAccessMode.Field)
-            .HasColumnName("FacultyId")
-            .IsRequired();
-
-        builder.HasOne<Person>()
-            .WithMany()
-            .HasForeignKey("_facultyId")
-            .OnDelete(DeleteBehavior.Restrict);
+        // builder.Property<Guid>("_facultyId")
+        //     .UsePropertyAccessMode(PropertyAccessMode.Field)
+        //     .HasColumnName("FacultyId")
+        //     .IsRequired();
+        //
+        // builder.HasOne<Person>()
+        //     .WithMany()
+        //     .HasForeignKey("_facultyId")
+        //     .OnDelete(DeleteBehavior.Restrict);
 
    
        

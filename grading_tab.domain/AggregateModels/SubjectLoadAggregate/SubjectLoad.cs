@@ -14,9 +14,9 @@ namespace grading_tab.domain.AggregateModels.SubjectLoadAggregate
         private List<Meeting>? _meetings;
 
 
-        // public Section Section { get; private set; }
-        // public Subject Subject { get; private set; }
-        // public Person Faculty { get; private set; }
+        public Section? Section { get; private set; }
+        public Subject? Subject { get; private set; }
+        public Person? Faculty { get; private set; }
         public ReadOnlyCollection<Meeting> Meetings => _meetings!.AsReadOnly();
         
 
