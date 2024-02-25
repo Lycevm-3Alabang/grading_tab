@@ -3,13 +3,15 @@ using grading_tab.domain.SeedWork;
 
 namespace grading_tab.infrastructure.Repositories
 {
-    public class SectionRepository : ISectionRepository
+    public class SectionRepository(GradingTabContext dbContext) : ISectionRepository
     {
-        public IUnitOfWork UnitOfWork => throw new NotImplementedException();
+        private readonly GradingTabContext _dbContext = dbContext;
+
+        public IUnitOfWork UnitOfWork => _dbContext;
 
         public Section Create(Section section)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         public Task<Section> GetByIdAsync(Guid id)

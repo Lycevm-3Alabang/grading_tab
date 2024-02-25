@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebAppli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "grading_tab.api", "grading_tab.api\grading_tab.api.csproj", "{A0BFB1A9-B557-4F4D-BC7E-0783877DC89C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A5691D53-A578-4247-8FAE-7F27F1D2F011}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "grading_tab.infrastructure_tests", "grading_tab.infrastructure_tests\grading_tab.infrastructure_tests.csproj", "{54103506-3606-4C45-8427-8B9514A42F0C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,11 +37,18 @@ Global
 		{A0BFB1A9-B557-4F4D-BC7E-0783877DC89C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0BFB1A9-B557-4F4D-BC7E-0783877DC89C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0BFB1A9-B557-4F4D-BC7E-0783877DC89C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54103506-3606-4C45-8427-8B9514A42F0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54103506-3606-4C45-8427-8B9514A42F0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54103506-3606-4C45-8427-8B9514A42F0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54103506-3606-4C45-8427-8B9514A42F0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E10DC837-0F8A-4BD6-9BEF-F21C29BB0643}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{54103506-3606-4C45-8427-8B9514A42F0C} = {A5691D53-A578-4247-8FAE-7F27F1D2F011}
 	EndGlobalSection
 EndGlobal

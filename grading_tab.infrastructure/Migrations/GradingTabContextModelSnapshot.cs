@@ -22,53 +22,6 @@ namespace grading_tab.infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("grading_tab.domain.AggregateModels.AssessmentAggregate.AssessmentResult", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTimeOffset>("AssessmentDate")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<decimal>("Grade")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Score")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TotalItems")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("_studentId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("StudentId");
-
-                    b.Property<int>("_subjectId")
-                        .HasColumnType("int")
-                        .HasColumnName("SubjectId");
-
-                    b.Property<int>("_termId")
-                        .HasColumnType("int")
-                        .HasColumnName("TermId");
-
-                    b.Property<int>("_typeId")
-                        .HasColumnType("int")
-                        .HasColumnName("TypeId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("_studentId");
-
-                    b.HasIndex("_subjectId");
-
-                    b.HasIndex("_termId");
-
-                    b.HasIndex("_typeId");
-
-                    b.ToTable("assessment_result", "dbo");
-                });
-
             modelBuilder.Entity("grading_tab.domain.AggregateModels.AssessmentAggregate.AssessmentType", b =>
                 {
                     b.Property<int>("Id")
@@ -155,6 +108,53 @@ namespace grading_tab.infrastructure.Migrations
                             Id = 4,
                             Name = "FINAL"
                         });
+                });
+
+            modelBuilder.Entity("grading_tab.domain.AggregateModels.AssessmentResultAggregate.AssessmentResult", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("AssessmentDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<decimal>("Grade")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalItems")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("_studentId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("StudentId");
+
+                    b.Property<int>("_subjectId")
+                        .HasColumnType("int")
+                        .HasColumnName("SubjectId");
+
+                    b.Property<int>("_termId")
+                        .HasColumnType("int")
+                        .HasColumnName("TermId");
+
+                    b.Property<int>("_typeId")
+                        .HasColumnType("int")
+                        .HasColumnName("TypeId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("_studentId");
+
+                    b.HasIndex("_subjectId");
+
+                    b.HasIndex("_termId");
+
+                    b.HasIndex("_typeId");
+
+                    b.ToTable("assessment_result", "dbo");
                 });
 
             modelBuilder.Entity("grading_tab.domain.AggregateModels.PersonAggregate.Person", b =>
@@ -352,7 +352,7 @@ namespace grading_tab.infrastructure.Migrations
                     b.ToTable("subject_load", "dbo");
                 });
 
-            modelBuilder.Entity("grading_tab.domain.AggregateModels.AssessmentAggregate.AssessmentResult", b =>
+            modelBuilder.Entity("grading_tab.domain.AggregateModels.AssessmentResultAggregate.AssessmentResult", b =>
                 {
                     b.HasOne("grading_tab.domain.AggregateModels.PersonAggregate.Person", "Student")
                         .WithMany()
@@ -425,23 +425,29 @@ namespace grading_tab.infrastructure.Migrations
 
             modelBuilder.Entity("grading_tab.domain.AggregateModels.SubjectLoadAggregate.SubjectLoad", b =>
                 {
-                    b.HasOne("grading_tab.domain.AggregateModels.PersonAggregate.Person", null)
+                    b.HasOne("grading_tab.domain.AggregateModels.PersonAggregate.Person", "Faculty")
                         .WithMany()
                         .HasForeignKey("_facultyId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("grading_tab.domain.AggregateModels.SectionAggregate.Section", null)
+                    b.HasOne("grading_tab.domain.AggregateModels.SectionAggregate.Section", "Section")
                         .WithMany()
                         .HasForeignKey("_sectionId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("grading_tab.domain.AggregateModels.SubjectLoadAggregate.Subject", null)
+                    b.HasOne("grading_tab.domain.AggregateModels.SubjectLoadAggregate.Subject", "Subject")
                         .WithMany()
                         .HasForeignKey("_subjectId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Faculty");
+
+                    b.Navigation("Section");
+
+                    b.Navigation("Subject");
                 });
 
             modelBuilder.Entity("grading_tab.domain.AggregateModels.SectionAggregate.Section", b =>

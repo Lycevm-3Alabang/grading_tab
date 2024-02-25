@@ -3,23 +3,23 @@ using grading_tab.domain.SeedWork;
 
 namespace grading_tab.infrastructure.Repositories
 {
-    public class PersonRepository : IPersonRepository
+    public class PersonRepository(GradingTabContext dbContext) : IPersonRepository
     {
-        public IUnitOfWork UnitOfWork => throw new NotImplementedException();
+        public IUnitOfWork UnitOfWork => dbContext;
 
         public Person Create(Person person)
         {
-            throw new NotImplementedException();
+            return dbContext.People.Add(person).Entity;
         }
 
-        public Task<Person> GetByIdAsync(Guid id)
+        public async Task<Person?> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await dbContext.People.FindAsync(id);
         }
 
         public Person Update(Person person)
         {
-            throw new NotImplementedException();
+            return dbContext.People.Update(person).Entity;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using grading_tab.domain.AggregateModels.AssessmentAggregate;
+using grading_tab.domain.AggregateModels.AssessmentResultAggregate;
 using grading_tab.domain.AggregateModels.PersonAggregate;
 using grading_tab.domain.AggregateModels.SectionAggregate;
 using grading_tab.domain.AggregateModels.SubjectLoadAggregate;
@@ -16,6 +17,7 @@ namespace grading_tab.infrastructure
 
         public DbSet<AssessmentResult> AssessmentResults { get; set; }
         public DbSet<SubjectLoad> SubjectLoads { get; set; }
+        public DbSet<Section> Sections { get; set; }
         public DbSet<Person> People { get; set; }
 
         public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
