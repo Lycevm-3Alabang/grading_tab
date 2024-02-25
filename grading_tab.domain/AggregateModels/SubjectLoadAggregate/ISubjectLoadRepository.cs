@@ -4,7 +4,7 @@ namespace grading_tab.domain.AggregateModels.SubjectLoadAggregate
 {
     public interface ISubjectLoadRepository : IRepository<SubjectLoad>
     {
-        SubjectLoad Create(SubjectLoad section);
+        SubjectLoad Create(SubjectLoad subjectLoad);
         SubjectLoad Update(SubjectLoad section);
         Task<SubjectLoad> GetByIdAsync(Guid id);
         Task<IEnumerable<SubjectLoad>> GetAllAsync();

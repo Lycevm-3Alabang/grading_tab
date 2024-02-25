@@ -1,5 +1,4 @@
-﻿using grading_tab.domain.AggregateModels.AssessmentAggregate;
-using grading_tab.domain.AggregateModels.AssessmentResultAggregate;
+﻿using grading_tab.domain.AggregateModels.AssessmentResultAggregate;
 using grading_tab.domain.AggregateModels.PersonAggregate;
 using grading_tab.domain.AggregateModels.SectionAggregate;
 using grading_tab.domain.AggregateModels.SubjectLoadAggregate;

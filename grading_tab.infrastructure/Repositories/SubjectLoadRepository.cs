@@ -1,16 +1,21 @@
-﻿using grading_tab.domain.AggregateModels.SectionAggregate;
-using grading_tab.domain.AggregateModels.SubjectLoadAggregate;
+﻿using grading_tab.domain.AggregateModels.SubjectLoadAggregate;
 using grading_tab.domain.SeedWork;
 
 namespace grading_tab.infrastructure.Repositories
 {
     public class SubjectLoadRepository : ISubjectLoadRepository
     {
-        public IUnitOfWork UnitOfWork => throw new NotImplementedException();
+        public IUnitOfWork UnitOfWork => _dbContext;
+        private readonly GradingTabContext _dbContext;
 
-        public SubjectLoad Create(SubjectLoad section)
+        public SubjectLoadRepository(GradingTabContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
+        }
+
+        public SubjectLoad Create(SubjectLoad subjectLoad)
+        {
+            return _dbContext.SubjectLoads.Add(subjectLoad).Entity;
         }
 
         public Task<IEnumerable<SubjectLoad>> GetAllAsync()
