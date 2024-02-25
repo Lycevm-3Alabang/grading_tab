@@ -1,10 +1,9 @@
-﻿
+﻿using grading_tab.domain.AggregateModels.AssessmentAggregate;
 using grading_tab.domain.AggregateModels.PersonAggregate;
-using grading_tab.domain.AggregateModels.SectionAggregate;
 using grading_tab.domain.AggregateModels.SubjectLoadAggregate;
 using grading_tab.domain.SeedWork;
 
-namespace grading_tab.domain.AggregateModels.AssessmentAggregate
+namespace grading_tab.domain.AggregateModels.AssessmentResultAggregate
 {
     public class AssessmentResult : Entity, IAggregateRoot
     {
