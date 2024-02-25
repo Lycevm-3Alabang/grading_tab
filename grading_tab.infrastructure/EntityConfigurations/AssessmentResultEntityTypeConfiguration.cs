@@ -10,6 +10,7 @@ public class AssessmentTypeEntityTypeConfiguration : IEntityTypeConfiguration<As
     {
         builder.ToTable("assessment_type", "dbo");
         builder.HasKey(x => x.Id);
+        builder.HasData(AssessmentType.Seed());
     }
 }
 public class AssessmentResultEntityTypeConfiguration : IEntityTypeConfiguration<AssessmentResult>

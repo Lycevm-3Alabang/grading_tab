@@ -1,4 +1,5 @@
 ﻿using grading_tab.domain.AggregateModels.PersonAggregate;
+using grading_tab.domain.AggregateModels.SectionAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,10 +11,25 @@ namespace grading_tab.infrastructure.EntityConfigurations
         {
             builder.ToTable("person","dbo");
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Number).IsRequired();
-            builder.HasIndex(x => x.Number).IsUnique();
-            builder.Property<Guid>("SectionId");
-           
+        }
+    }
+    
+    public class StudentEntityTyeConfiguration : IEntityTypeConfiguration<Student>
+    {
+        public void Configure(EntityTypeBuilder<Student> builder)
+        {
+            builder.ToTable("student","dbo");
+            builder.HasKey(x => x.Id);
+            
+            builder.Property<Guid>("_personId")
+                .UsePropertyAccessMode(PropertyAccessMode.Field)
+                .HasColumnName("PersonId")
+                .IsRequired();
+
+            builder.HasOne<Person>()
+                .WithMany()
+                .HasForeignKey("_personId")
+                .OnDelete(DeleteBehavior.Restrict);;
         }
     }
 }
