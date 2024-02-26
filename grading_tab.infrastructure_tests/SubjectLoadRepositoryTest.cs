@@ -51,11 +51,12 @@ public class SubjectLoadRepositoryTest
     {
         //Arrange
         var context = await CreateInMemoryDbContext();
+        var faculty = context.People.AsNoTracking().First();
+        var section = context.Sections.AsNoTracking().First();
         var repository = new SubjectLoadRepository(context);
-        
 
         //Act
-        var created = repository.Create(new SubjectLoad(Guid.NewGuid(), Guid.NewGuid(), 1));
+        var created = repository.Create(new SubjectLoad(faculty.Id, section.Id, Subject.Seed().First().Id));
         await repository.UnitOfWork.SaveEntitiesAsync();
         var result = await repository.GetByIdAsync(created.Id);
 
