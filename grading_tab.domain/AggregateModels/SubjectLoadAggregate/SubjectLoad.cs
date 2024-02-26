@@ -25,6 +25,7 @@ namespace grading_tab.domain.AggregateModels.SubjectLoadAggregate
             _facultyId = facultyId;
             _sectionId = sectionId;
             _subjectId = subjectId;
+            _meetings = [];
         }
 
         protected SubjectLoad()
@@ -38,6 +39,7 @@ namespace grading_tab.domain.AggregateModels.SubjectLoadAggregate
             if (_meetings.Count < 2)
             {
                 _meetings.Add(meeting);
+                return;
             }
 
             throw new MeetingOverTheLimitException();
@@ -48,10 +50,10 @@ namespace grading_tab.domain.AggregateModels.SubjectLoadAggregate
             _meetings!.Remove(meeting);
         }
 
-        public void SetFaculty(Guid id) => _facultyId = id;
-        public void SetSubject(int id) => _subjectId = id;
-        public void SetSection(Guid id) => _sectionId = id;
-        
+        public Guid GetFacultyId() => _facultyId;
+        public int GetSubjectId() => _subjectId;
+        public Guid GetSectionId() => _sectionId;
+
     }
     
 }
