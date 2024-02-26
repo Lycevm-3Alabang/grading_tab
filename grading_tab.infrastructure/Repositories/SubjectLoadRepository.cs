@@ -10,7 +10,7 @@ namespace grading_tab.infrastructure.Repositories
 
         public SubjectLoadRepository(GradingTabContext dbContext)
         {
-            _dbContext = dbContext;
+            _dbContext = dbContext?? throw new ArgumentNullException(nameof(dbContext));
         }
 
         public SubjectLoad Create(SubjectLoad subjectLoad)
@@ -18,19 +18,33 @@ namespace grading_tab.infrastructure.Repositories
             return _dbContext.SubjectLoads.Add(subjectLoad).Entity;
         }
 
-        public Task<IEnumerable<SubjectLoad>> GetAllAsync()
+        public async Task<IEnumerable<SubjectLoad>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var subjectLoads = await _dbContext.SubjectLoads
+                .Include(x => x.Subject)
+                .Include(x => x.Meetings).ThenInclude(x => x.Type)
+                .Include(x => x.Faculty)
+                .Include(x => x.Section)
+                .ToListAsync();
+
+            return subjectLoads;
         }
 
-        public Task<SubjectLoad> GetByIdAsync(Guid id)
+        public async Task<SubjectLoad?> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var subjectLoad = await _dbContext.SubjectLoads
+                .Include(x => x.Subject)
+                .Include(x => x.Meetings).ThenInclude(x => x.Type)
+                .Include(x => x.Faculty)
+                .Include(x => x.Section)
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            return subjectLoad;
         }
 
-        public SubjectLoad Update(SubjectLoad section)
+        public SubjectLoad Update(SubjectLoad subjectLoad)
         {
-            throw new NotImplementedException();
+            return _dbContext.SubjectLoads.Update(subjectLoad).Entity;
         }
     }
 }

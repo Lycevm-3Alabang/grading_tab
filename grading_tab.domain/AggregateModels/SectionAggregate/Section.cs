@@ -9,12 +9,12 @@ namespace grading_tab.domain.AggregateModels.SectionAggregate
         public string? Name { get; private set; }
 
         private List<Student>? _students;
-        public ReadOnlyCollection<Student> Students => _students!.AsReadOnly();
+        public IEnumerable<Student> Students => _students!.AsReadOnly();
 
 
         protected Section()
         {
-            _students = [];
+            _students = new();
         }
 
         public Section(string? name) : this() { }        

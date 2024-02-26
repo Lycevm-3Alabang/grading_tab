@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "grading_tab.infrastructure"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{03D832A5-D900-4A30-9FA7-ED59305E28F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "grading_tab.api", "grading_tab.api\grading_tab.api.csproj", "{A0BFB1A9-B557-4F4D-BC7E-0783877DC89C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A5691D53-A578-4247-8FAE-7F27F1D2F011}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "grading_tab.infrastructure_tests", "grading_tab.infrastructure_tests\grading_tab.infrastructure_tests.csproj", "{54103506-3606-4C45-8427-8B9514A42F0C}"
@@ -33,10 +31,6 @@ Global
 		{03D832A5-D900-4A30-9FA7-ED59305E28F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03D832A5-D900-4A30-9FA7-ED59305E28F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03D832A5-D900-4A30-9FA7-ED59305E28F9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A0BFB1A9-B557-4F4D-BC7E-0783877DC89C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A0BFB1A9-B557-4F4D-BC7E-0783877DC89C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A0BFB1A9-B557-4F4D-BC7E-0783877DC89C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A0BFB1A9-B557-4F4D-BC7E-0783877DC89C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{54103506-3606-4C45-8427-8B9514A42F0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{54103506-3606-4C45-8427-8B9514A42F0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54103506-3606-4C45-8427-8B9514A42F0C}.Release|Any CPU.ActiveCfg = Release|Any CPU

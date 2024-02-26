@@ -1,6 +1,4 @@
 using grading_tab.domain.AggregateModels.SectionAggregate;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace grading_tab.infrastructure.EntityConfigurations;
 

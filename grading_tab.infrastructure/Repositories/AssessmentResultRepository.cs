@@ -1,7 +1,6 @@
 ﻿using grading_tab.domain.AggregateModels.AssessmentAggregate;
 using grading_tab.domain.AggregateModels.AssessmentResultAggregate;
 using grading_tab.domain.SeedWork;
-using Microsoft.EntityFrameworkCore;
 
 namespace grading_tab.infrastructure.Repositories
 {

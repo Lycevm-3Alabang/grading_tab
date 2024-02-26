@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 using Microsoft.EntityFrameworkCore.Design;
 
 namespace grading_tab.infrastructure;
@@ -9,7 +9,7 @@ public class GradingTabContextContextDesignFactory : IDesignTimeDbContextFactory
     {
         var optionsBuilder = new DbContextOptionsBuilder<GradingTabContext>()
             .UseSqlServer("Server=localhost;Database=E3_DB;User Id=sa;Password=someThingComplicated1234;TrustServerCertificate=True;MultiSubnetFailover=True;", 
-                x => x.MigrationsAssembly(typeof(GradingTabContext).Assembly.FullName));
+                x => x.MigrationsAssembly(Assembly.GetAssembly(typeof(GradingTabContext))?.GetName().Name));
 
         return new GradingTabContext(optionsBuilder.Options);
     }

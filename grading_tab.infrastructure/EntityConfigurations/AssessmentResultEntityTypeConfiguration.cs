@@ -1,7 +1,5 @@
 using grading_tab.domain.AggregateModels.AssessmentAggregate;
 using grading_tab.domain.AggregateModels.AssessmentResultAggregate;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace grading_tab.infrastructure.EntityConfigurations;
 
