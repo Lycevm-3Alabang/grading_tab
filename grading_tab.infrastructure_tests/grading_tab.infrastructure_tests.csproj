@@ -24,10 +24,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Functional Tests\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\grading_tab.domain\grading_tab.domain.csproj" />
       <ProjectReference Include="..\grading_tab.infrastructure\grading_tab.infrastructure.csproj" />
     </ItemGroup>

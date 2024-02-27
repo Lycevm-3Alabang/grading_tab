@@ -3,12 +3,12 @@ using grading_tab.domain.SeedWork;
 
 namespace grading_tab.infrastructure.Repositories
 {
-    public class SubjectLoadRepository : ISubjectLoadRepository
+    public class SubjectLoadRepositoryFunctional : ISubjectLoadRepository
     {
         public IUnitOfWork UnitOfWork => _dbContext;
         private readonly GradingTabContext _dbContext;
 
-        public SubjectLoadRepository(GradingTabContext dbContext)
+        public SubjectLoadRepositoryFunctional(GradingTabContext dbContext)
         {
             _dbContext = dbContext?? throw new ArgumentNullException(nameof(dbContext));
         }

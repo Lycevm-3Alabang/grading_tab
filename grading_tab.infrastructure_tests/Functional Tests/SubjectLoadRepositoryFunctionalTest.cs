@@ -1,4 +1,3 @@
-using grading_tab.domain.AggregateModels.AssessmentAggregate;
 using grading_tab.domain.AggregateModels.PersonAggregate;
 using grading_tab.domain.AggregateModels.SectionAggregate;
 using grading_tab.domain.AggregateModels.SubjectLoadAggregate;
@@ -7,12 +6,11 @@ using grading_tab.infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Shouldly;
 
+namespace grading_tab.infrastructure_tests.Functional_Tests;
 
-namespace grading_tab.infrastructure_tests;
-
-public class SubjectLoadRepositoryTest
+public class SubjectLoadRepositoryFunctionalTest
 {
-    private async Task<GradingTabContext> CreateInMemoryDbContext()
+    private static async Task<GradingTabContext> CreateInMemoryDbContext()
     {
         var dbContextOptions = new DbContextOptionsBuilder<GradingTabContext>()
             .UseInMemoryDatabase(databaseName: "in-memory")
@@ -32,7 +30,7 @@ public class SubjectLoadRepositoryTest
     }
     
     [Fact]
-    public async Task TestDbContext()
+    public async Task GivenAnInMemoryDbContext_EnsureSeededValuesExist()
     {
         // Arrange
         var context =  await CreateInMemoryDbContext();
@@ -47,13 +45,13 @@ public class SubjectLoadRepositoryTest
     }
     
     [Fact]
-    public async Task WhenCreatingANewSubject_EnsurePersistence()
+    public async Task GivenSubjectLoadIsPersisted_EnsureEntityIsNotTransient()
     {
         //Arrange
         var context = await CreateInMemoryDbContext();
         var faculty = context.People.AsNoTracking().First();
         var section = context.Sections.AsNoTracking().First();
-        var repository = new SubjectLoadRepository(context);
+        var repository = new SubjectLoadRepositoryFunctional(context);
 
         //Act
         var created = repository.Create(new SubjectLoad(faculty.Id, section.Id, Subject.Seed().First().Id));
@@ -63,5 +61,6 @@ public class SubjectLoadRepositoryTest
         //Assert
         result.ShouldNotBeNull();
         result.Id.ShouldBe(created.Id);
+        result.IsTransient().ShouldBeFalse();
     }
 }
