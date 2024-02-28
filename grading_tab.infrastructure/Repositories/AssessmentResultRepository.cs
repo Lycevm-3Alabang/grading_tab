@@ -26,10 +26,6 @@ namespace grading_tab.infrastructure.Repositories
         public async Task<AssessmentResult?> GetByIdAsync(Guid id)
         {
             return await dbContext.AssessmentResults
-                .Include(x => x.Student)
-                .Include(x => x.Subject)
-                .Include(x => x.Term)
-                .Include(x => x.Type)
                 .SingleOrDefaultAsync();
         }
 
