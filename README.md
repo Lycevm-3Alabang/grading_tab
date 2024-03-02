@@ -20,9 +20,3 @@ Assignment: 15%
 Project Completion: 18%
 Project Delivery: 18%
 Remember, these are just percentage contributions within the "bracket" component, which itself holds a 60% weight in the final grade. The major exam holds the remaining 40% weight.
-
-
-
-
-asdfasdf
-sadfasdfadsf
