@@ -23,7 +23,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Application\Features\AssessmentResult\" />
+      <Folder Include="Application\Features\FacultyLoading\" />
       <Folder Include="Application\Features\Section\Commands\" />
+      <Folder Include="Application\Features\Section\Queries\" />
     </ItemGroup>
 
 </Project>

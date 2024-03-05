@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "grading_tab.infrastructure_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "grading_tab.application", "grading_tab.application\grading_tab.application.csproj", "{76996729-5B0F-499F-8B78-8DFC89B41D3B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "grading_tab.application_tests", "grading_tab.application_tests\grading_tab.application_tests.csproj", "{540F9E40-DA5B-432D-B2B2-6E5A7549C2B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{76996729-5B0F-499F-8B78-8DFC89B41D3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76996729-5B0F-499F-8B78-8DFC89B41D3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76996729-5B0F-499F-8B78-8DFC89B41D3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{540F9E40-DA5B-432D-B2B2-6E5A7549C2B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{540F9E40-DA5B-432D-B2B2-6E5A7549C2B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{540F9E40-DA5B-432D-B2B2-6E5A7549C2B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{540F9E40-DA5B-432D-B2B2-6E5A7549C2B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,5 +56,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{54103506-3606-4C45-8427-8B9514A42F0C} = {A5691D53-A578-4247-8FAE-7F27F1D2F011}
+		{540F9E40-DA5B-432D-B2B2-6E5A7549C2B9} = {A5691D53-A578-4247-8FAE-7F27F1D2F011}
 	EndGlobalSection
 EndGlobal
