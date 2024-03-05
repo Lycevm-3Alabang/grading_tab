@@ -6,7 +6,7 @@ namespace grading_tab.domain.AggregateModels.SectionAggregate
     {
         Section Create(Section section);
         Section Update(Section section);
-        Task<Section> GetByIdAsync(Guid id);
+        Task<Section?> GetByIdAsync(Guid id);
     }
     
 }

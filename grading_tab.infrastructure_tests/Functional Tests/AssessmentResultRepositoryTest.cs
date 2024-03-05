@@ -10,12 +10,12 @@ using Shouldly;
 
 namespace grading_tab.infrastructure_tests.Functional_Tests;
 
-public class AssessmentResultRepositoryFunctionalTest
+public class AssessmentResultRepositoryTest
 {
     private static async Task<GradingTabContext> CreateInMemoryDbContext()
     {
         var dbContextOptions = new DbContextOptionsBuilder<GradingTabContext>()
-            .UseInMemoryDatabase(databaseName: "in-memory")
+            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
             .Options;
         var sharedContext = new GradingTabContext(dbContextOptions);
         await sharedContext.Database.EnsureDeletedAsync();
@@ -57,5 +57,10 @@ public class AssessmentResultRepositoryFunctionalTest
         result.ShouldNotBeNull();
         result.Id.ShouldBe(created.Id);
         result.IsTransient().ShouldBeFalse();
+        result.Type.ShouldNotBeNull();
+        result.Type.Name.ShouldBe(AssessmentType.Seed().First().Name);
+        result.Type.Id.ShouldBe(AssessmentType.Seed().First().Id);
+        result.Subject.ShouldBe(Subject.Seed().First());
+        result.Term.ShouldBe(Term.Seed().First());
     }
 }

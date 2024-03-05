@@ -10,10 +10,11 @@ namespace grading_tab.infrastructure_tests.Functional_Tests;
 
 public class SubjectLoadRepositoryTest
 {
+    private readonly GradingTabContext _dbContext;
     private static async Task<GradingTabContext> CreateInMemoryDbContext()
     {
         var dbContextOptions = new DbContextOptionsBuilder<GradingTabContext>()
-            .UseInMemoryDatabase(databaseName: "in-memory")
+            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
             .Options;
         var sharedContext = new GradingTabContext(dbContextOptions);
         await sharedContext.Database.EnsureDeletedAsync();
@@ -36,7 +37,7 @@ public class SubjectLoadRepositoryTest
         GradingTabContext? context = null;
 
         //Act
-        context =  await CreateInMemoryDbContext();
+        context = await CreateInMemoryDbContext();
 
         //Assert
         context.ShouldNotBeNull();

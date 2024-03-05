@@ -13,14 +13,17 @@ namespace grading_tab.domain.AggregateModels.SectionAggregate
 
         protected Section()
         {
-            _students = new();
+            _students = [];
         }
 
-        public Section(string? name) : this() { }        
+        public Section(string? name) : this()
+        {
+            Name = name;
+        }        
 
         public void AddStudent(Student student)
         {
-            if (_students == null) _students = new();
+            _students ??= [];
             _students.Add(student);
         }
 

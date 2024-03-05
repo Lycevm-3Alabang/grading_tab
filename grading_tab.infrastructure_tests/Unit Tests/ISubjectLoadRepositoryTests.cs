@@ -4,7 +4,7 @@ using Shouldly;
 
 namespace grading_tab.infrastructure_tests.Unit_Tests;
 
-public class SubjectLoadRepositoryUnitTests
+public class ISubjectLoadRepositoryTests
 {
     [Fact]
     public void GivenASubjectLoad_WhenAddedAndSaved_ThenEnsureEntityIsCreated()

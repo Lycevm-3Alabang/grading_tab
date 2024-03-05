@@ -5,23 +5,15 @@ namespace grading_tab.infrastructure.Repositories
 {
     public class SectionRepository(GradingTabContext dbContext) : ISectionRepository
     {
-        private readonly GradingTabContext _dbContext = dbContext;
+        public IUnitOfWork UnitOfWork => dbContext;
 
-        public IUnitOfWork UnitOfWork => _dbContext;
+        public Section Create(Section section) => dbContext.Sections.Add(section).Entity;
 
-        public Section Create(Section section)
-        {
-            return null;
-        }
+        public async Task<Section?> GetByIdAsync(Guid id) =>
+            await dbContext.Sections
+                .Include(x => x.Students)
+                .FirstOrDefaultAsync(x => x.Id == id); 
 
-        public Task<Section> GetByIdAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Section Update(Section section)
-        {
-            throw new NotImplementedException();
-        }
+        public Section Update(Section section) => dbContext.Sections.Add(section).Entity;
     }
 }
