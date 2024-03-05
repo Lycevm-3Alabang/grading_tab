@@ -1,5 +1,4 @@
-﻿using grading_tab.domain.AggregateModels.PersonAggregate;
-using grading_tab.domain.SeedWork;
+﻿using grading_tab.domain.SeedWork;
 using System.Collections.ObjectModel;
 
 namespace grading_tab.domain.AggregateModels.SectionAggregate
@@ -27,29 +26,4 @@ namespace grading_tab.domain.AggregateModels.SectionAggregate
 
         public void RemoveStudent(Student student) => _students!.Remove(student);
     }
-
-    public class Student : Entity
-    {
-        public string? Number { get; set; }
-        public string? Course { get; set; }
-        private Guid _personId;
-        public Person Person { get; private set; }
-
-        public Student(string? number,string? course, Person person)
-        {
-            Number = number;
-            Course = course;
-            Person = person;
-        }
-        
-        public Student(string? number,string? course, Guid personId)
-        {
-            Number = number;
-            Course = course;
-            _personId = personId;
-        }
-        
-        protected Student(){}
-    }
-    
 }

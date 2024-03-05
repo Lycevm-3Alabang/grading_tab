@@ -1,5 +1,6 @@
 ﻿using grading_tab.domain.AggregateModels.AssessmentAggregate;
 using grading_tab.domain.AggregateModels.PersonAggregate;
+using grading_tab.domain.AggregateModels.SectionAggregate;
 using grading_tab.domain.AggregateModels.SubjectLoadAggregate;
 using grading_tab.domain.SeedWork;
 
@@ -16,7 +17,7 @@ namespace grading_tab.domain.AggregateModels.AssessmentResultAggregate
         public AssessmentType? Type { get; private set; }
 
         private Guid _studentId;
-        public Person? Student { get; private set; }
+        public Student? Student { get; private set; }
 
         public int _termId;
         public Term? Term { get; private set;}
