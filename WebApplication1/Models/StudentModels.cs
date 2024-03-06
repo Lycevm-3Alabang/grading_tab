@@ -2,13 +2,17 @@ using System.Text.Json.Serialization;
 
 namespace WebApplication1.Models;
 
-public class StudentModels
+public class AddStudentModel
 {
-    [JsonPropertyName("section_name")]
+    [JsonPropertyName("first_name")]
     [JsonRequired]
     public string? FirstName { get; init; }
     
-    [JsonPropertyName("section_name")]
+    [JsonPropertyName("last_name")]
     [JsonRequired]
     public string? LastName { get; init; }
+    
+    [JsonPropertyName("middle_name")]
+    [JsonRequired]
+    public string? MiddleName { get; init; }
 }

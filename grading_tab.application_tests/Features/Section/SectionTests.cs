@@ -24,7 +24,7 @@ public class SectionsControllerTests
         var controller = new SectionsController(_mediatorMock.Object);
 
         // Act
-        var result = await controller.Post(model);
+        var result = await controller.AddSection(model);
 
         // Assert
         result.ShouldBeOfType(typeof(OkObjectResult));
@@ -42,7 +42,7 @@ public class SectionsControllerTests
         controller.ModelState.AddModelError("Name", "Name is required");
 
         // Act
-        var result = await controller.Post(null);
+        var result = await controller.AddSection(null);
 
         // Assert
         result.ShouldBeOfType<BadRequestObjectResult>();

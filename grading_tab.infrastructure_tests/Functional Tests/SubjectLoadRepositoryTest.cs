@@ -20,7 +20,7 @@ public class SubjectLoadRepositoryTest
         await sharedContext.Database.EnsureDeletedAsync();
         await sharedContext.Database.EnsureCreatedAsync();
 
-        var person = new Person("John", "Krasinski", "Wick");
+        var person = new Person("John", "Krasinski", "Wick","");
         var section = new Section("BSCS-XXXX");
         var student = new Student("1234-56", "BS Computer Science", person);
         section.AddStudent(student);
