@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Serilog.Context;
 
+
 namespace grading_tab.application.Application.Behaviors
 {
     public class TransactionBehaviour<TRequest, TResponse>(
@@ -20,7 +21,7 @@ namespace grading_tab.application.Application.Behaviors
         //TODO: Not this time ->ICatalogIntegrationEventService orderingIntegrationEventService,
         //TODO: Not this time ->_orderingIntegrationEventService = orderingIntegrationEventService ?? throw new ArgumentException(nameof(orderingIntegrationEventService));
 
-        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next,
+        public async Task<TResponse?> Handle(TRequest request, RequestHandlerDelegate<TResponse> next,
             CancellationToken cancellationToken)
         {
             var response = default(TResponse);

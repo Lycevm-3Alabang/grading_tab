@@ -1,0 +1,6 @@
+@grading_tab.api_HostAddress = http://localhost:5155
+
+GET {{grading_tab.api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
