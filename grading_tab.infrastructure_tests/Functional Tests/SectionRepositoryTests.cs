@@ -47,6 +47,35 @@ public class SectionRepositoryTests
         result.Id.ShouldBe(created.Id);
         result.IsTransient().ShouldBeFalse();
     }
+    
+    [Fact]
+    public async Task WhenAddingStudent_EnsureSectionPersistsWithStudentRecord2()
+    {
+        var context = await CreateInMemoryDbContext();
+        var repository = new SectionRepository(context);
+        var sectionId = ((await context.Sections.AsNoTracking().FirstOrDefaultAsync())!).Id;
+        var student = new Student("9999-99", "BSIT");
+        student.SetPerson(new Person("Jean Claude", "Van Damme", "Duterte"));
+
+        var updated = await repository.GetByIdAsync(sectionId);
+        updated?.AddStudent(student);
+        var unit = await repository.UnitOfWork.SaveChangesAsync(default);
+
+        updated.ShouldNotBeNull();
+        updated.Students.Any().ShouldBeTrue();
+        updated.Students.Count().ShouldBe(2);
+        updated.Students.ShouldContain(student);
+        updated.Students.Any(i => i.Person.Id == student.Person.Id).ShouldBeTrue();
+        var addedStudent = updated.Students.FirstOrDefault(x => x.Id == student.Id);
+        addedStudent.ShouldBe(student);
+        addedStudent!.Number.ShouldBe("9999-99");
+        addedStudent.Course.ShouldBe("BSIT");
+        addedStudent.Person.LastName.ShouldBe("Van Damme");
+        addedStudent.Person.FirstName.ShouldBe("Jean Claude");
+        addedStudent.Person.IsTransient().ShouldBeFalse();
+        addedStudent.Person.Id.ShouldNotBe(Guid.Empty);
+        unit.ShouldBe(2);
+    }
 
     [Fact]
     public async Task WhenAddingStudent_EnsureSectionPersistsWithStudentRecord()

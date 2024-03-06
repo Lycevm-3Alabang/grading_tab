@@ -23,6 +23,14 @@ public class Student : Entity
         Course = course;
         _personId = personId;
     }
+
+    public Student(string? number, string? course)
+    {
+        Number = number;
+        Course = course;
+    }
         
     protected Student(){}
+
+    public void SetPerson(Person person) => Person = person;
 }
