@@ -1,51 +1,30 @@
-using grading_tab.infrastructure;
-using Microsoft.EntityFrameworkCore;
 
-namespace WebApplication1
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+using grading_tab.domain.AggregateModels.SectionAggregate;
+using grading_tab.infrastructure.Repositories;
+using WebApplication1;
 
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();
-            builder.Services.AddDbContext<GradingTabContext>(options =>
-                {
-                    options.UseSqlServer(connectionString);
-                    options.UseSqlServer(connectionString,
-                        sqlOptions =>
-                        {
-                            sqlOptions.MigrationsAssembly(typeof(GradingTabContext).Assembly.FullName);
-                            sqlOptions.EnableRetryOnFailure(15, TimeSpan.FromSeconds(30), null);
-                        });
-                } //Showing explicitly that the DbContext is shared across the HTTP request scope (graph of objects started in the HTTP request)
-            );
+var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
+                       throw new ArgumentNullException(nameof(builder.Configuration));
 
-            var app = builder.Build();
+// Add services to the container.
+builder.Services
+    .AddCustomDbContext(connectionString!)
+    .AddCustomSwagger()
+    .AddMediatorBundles()
+    .AddEndpointsApiExplorer()
+    .AddControllers();
 
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+builder.Services.AddScoped(typeof(ISectionRepository), typeof(SectionRepository));
+    
+var app = builder.Build();
+var swaggerUrl = "/swagger/V1/swagger.json";
+var swaggerName = "Lycevm Alabang - Grading API";
+app.UseSwagger()
+    .UseSwaggerUI(options => { options.SwaggerEndpoint(swaggerUrl, swaggerName); })
+    .UseHttpsRedirection()
+    .UseRouting()
+    .UseAuthorization();
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
-
-            app.Run();
-        }
-    }
-}
+app.MapControllers();
+app.Run();
