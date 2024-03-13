@@ -15,4 +15,16 @@ public class AddStudentModel
     [JsonPropertyName("middle_name")]
     [JsonRequired]
     public string? MiddleName { get; init; }
+    
+    [JsonPropertyName("name_suffix")]
+    [JsonRequired]
+    public string? NameSuffix { get; init; }
+    
+    [JsonPropertyName("student_number")]
+    [JsonRequired]
+    public string? Number { get; init; }
+    
+    [JsonPropertyName("course")]
+    [JsonRequired]
+    public string? Course { get; init; }
 }

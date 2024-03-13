@@ -1,7 +1,9 @@
 using System.Net;
 using grading_tab.application.Application.Features.Section.Commands.AddSection;
+using grading_tab.application.Application.Features.Section.Commands.AddStudent;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Extensions;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers;
@@ -16,16 +18,16 @@ public class SectionsController(IMediator mediator) : ControllerBase
     [ProducesErrorResponseType(typeof(BadRequestObjectResult))]
     public async Task<IActionResult> AddSection([FromBody] AddSectionModel model)
     {
-        var result = await mediator.Send(new AddSectionCommand(model.Name!));
+        var result = await mediator.Send(model.ToCommand());
         return Ok(result);
     }
     
-    [HttpPost]
+    [HttpPost("{id}/students")]
     [ProducesResponseType(typeof(Guid),StatusCodes.Status200OK)]
     [ProducesErrorResponseType(typeof(BadRequestObjectResult))]
-    public async Task<IActionResult> AddStudent([FromBody] AddStudentModel model)
+    public async Task<IActionResult> AddStudent(Guid id, [FromBody] AddStudentModel model)
     {
-        var result = await mediator.Send(null);
+        var result = await mediator.Send(model.ToCommand(id));
         return Ok(result);
     }
 }
