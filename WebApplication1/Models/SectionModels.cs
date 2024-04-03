@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace WebApplication1.Models;
 
-public class AddSectionModel
+public record AddSectionModel
 {
     [JsonPropertyName("section_name")]
     [JsonRequired]

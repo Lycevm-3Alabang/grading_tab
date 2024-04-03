@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using grading_tab.domain.AggregateModels.PersonAggregate;
+﻿using grading_tab.domain.AggregateModels.PersonAggregate;
 using grading_tab.domain.AggregateModels.SectionAggregate;
 using grading_tab.domain.Exceptions;
 using grading_tab.domain.SeedWork;
@@ -25,7 +24,6 @@ namespace grading_tab.domain.AggregateModels.SubjectLoadAggregate
             _facultyId = facultyId;
             _sectionId = sectionId;
             _subjectId = subjectId;
-            _meetings = [];
         }
 
         protected SubjectLoad()
@@ -35,14 +33,9 @@ namespace grading_tab.domain.AggregateModels.SubjectLoadAggregate
 
         public void AddMeeting(Meeting meeting)
         {
-            if (_meetings == null) _meetings = [];
-            if (_meetings.Count < 2)
-            {
-                _meetings.Add(meeting);
-                return;
-            }
-
-            throw new MeetingOverTheLimitException();
+            _meetings ??= [];
+            if (_meetings.Count >= 2) throw new MeetingOverTheLimitException();
+            _meetings.Add(meeting);
         }
 
         public void RemoveMeeting(Meeting meeting)

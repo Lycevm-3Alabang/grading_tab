@@ -22,9 +22,8 @@ public class SectionsControllerTests
         _mediatorMock.Setup(m => m.Send(It.IsAny<AddSectionCommand>(),default))
             .Returns(Task.FromResult(expectedResult));
 
-        var controller = new SectionsController(_mediatorMock.Object);
-
         // Act
+        var controller = new SectionsController(_mediatorMock.Object);
         var result = await controller.AddSection(model);
 
         // Assert
@@ -44,10 +43,10 @@ public class SectionsControllerTests
         Guid? studentId = Guid.NewGuid();
         _mediatorMock.Setup(m => m.Send(It.IsAny<AddSectionCommand>(),default)).Returns(Task.FromResult(sectionId));
         _mediatorMock.Setup(x => x.Send(It.IsAny<AddStudentCommand>(), default)).Returns(Task.FromResult(studentId));
-        var controller = new SectionsController(_mediatorMock.Object);
 
         // Act
-        var result = await controller.AddSection(model);
+        var controller = new SectionsController(_mediatorMock.Object);
+        await controller.AddSection(model);
         var studentResult = await controller.AddStudent(sectionId.Value, new AddStudentModel());
 
         // Assert

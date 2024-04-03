@@ -1,6 +1,3 @@
-using System.Net;
-using grading_tab.application.Application.Features.Section.Commands.AddSection;
-using grading_tab.application.Application.Features.Section.Commands.AddStudent;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Extensions;

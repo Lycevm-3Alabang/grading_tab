@@ -32,7 +32,8 @@ public class AssessmentResultRepositoryTest
     }
     
     [Fact]
-    public async Task WhenAddingAssessmentResult_EnsureDatabasePersistence()
+    public async Task 
+        WhenAddingAssessmentResult_EnsureDatabasePersistence()
     {
         //Arrange
         var context = await CreateInMemoryDbContext();
