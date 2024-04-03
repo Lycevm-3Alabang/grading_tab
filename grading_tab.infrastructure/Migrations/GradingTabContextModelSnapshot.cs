@@ -231,11 +231,11 @@ namespace grading_tab.infrastructure.Migrations
                     b.Property<int>("Day")
                         .HasColumnType("int");
 
-                    b.Property<int>("EndTime")
-                        .HasColumnType("int");
+                    b.Property<DateTimeOffset>("EndTime")
+                        .HasColumnType("datetimeoffset");
 
-                    b.Property<int>("StartTime")
-                        .HasColumnType("int");
+                    b.Property<DateTimeOffset>("StartTime")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<Guid?>("SubjectLoadId")
                         .HasColumnType("uniqueidentifier");

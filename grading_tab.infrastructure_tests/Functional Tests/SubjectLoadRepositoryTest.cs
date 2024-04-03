@@ -71,4 +71,31 @@ public class SubjectLoadRepositoryTest
         result.Id.ShouldBe(created.Id);
         result.IsTransient().ShouldBeFalse();
     }
+    
+    [Fact]
+    public async Task WhenAddingMeeting_EnsureDatabasePersistence()
+    {
+        //Arrange
+        var context = await CreateInMemoryDbContext();
+        var faculty = context.People.AsNoTracking().First();
+        var section = context.Sections.AsNoTracking().First();
+        var meetingType = context.MeetingTypes.AsNoTracking().First();
+        var repository = new SubjectLoadRepository(context);
+        var startTime = new DateTime(DateOnly.FromDateTime(DateTime.Now), new TimeOnly(7, 0, 0));
+        var endTime = new DateTime(DateOnly.FromDateTime(DateTime.Now), new TimeOnly(10, 0, 0));
+
+        //Act
+        var created = repository.Create(new SubjectLoad(faculty.Id, section.Id, Subject.Seed().First().Id));
+        await repository.UnitOfWork.SaveEntitiesAsync();
+        var result = await repository.GetByIdAsync(created.Id);
+        result!.AddMeeting(new Meeting(meetingType.Id,startTime,endTime,DayOfWeek.Saturday));
+        repository.Update(result);
+        await repository.UnitOfWork.SaveChangesAsync(default);
+
+        //Assert
+        result.ShouldNotBeNull();
+        result.Id.ShouldBe(created.Id);
+        result.IsTransient().ShouldBeFalse();
+        result.Meetings.Count().ShouldBe(1);
+    }
 }

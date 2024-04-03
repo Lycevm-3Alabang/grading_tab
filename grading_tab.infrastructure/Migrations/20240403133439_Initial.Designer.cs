@@ -12,8 +12,8 @@ using grading_tab.infrastructure;
 namespace grading_tab.infrastructure.Migrations
 {
     [DbContext(typeof(GradingTabContext))]
-    [Migration("20240305104443_fixed_person_student_configuration")]
-    partial class fixed_person_student_configuration
+    [Migration("20240403133439_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -175,6 +175,9 @@ namespace grading_tab.infrastructure.Migrations
                     b.Property<string>("Middlename")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("NameSuffix")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("person", "dbo");
@@ -231,11 +234,11 @@ namespace grading_tab.infrastructure.Migrations
                     b.Property<int>("Day")
                         .HasColumnType("int");
 
-                    b.Property<int>("EndTime")
-                        .HasColumnType("int");
+                    b.Property<DateTimeOffset>("EndTime")
+                        .HasColumnType("datetimeoffset");
 
-                    b.Property<int>("StartTime")
-                        .HasColumnType("int");
+                    b.Property<DateTimeOffset>("StartTime")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<Guid?>("SubjectLoadId")
                         .HasColumnType("uniqueidentifier");

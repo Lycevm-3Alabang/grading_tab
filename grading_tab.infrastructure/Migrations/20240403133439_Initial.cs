@@ -45,6 +45,22 @@ namespace grading_tab.infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "person",
+                schema: "dbo",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Middlename = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NameSuffix = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_person", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "section",
                 schema: "dbo",
                 columns: table => new
@@ -86,25 +102,66 @@ namespace grading_tab.infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "person",
+                name: "student",
                 schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Middlename = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Number = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    SectionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    Number = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Course = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PersonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SectionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_person", x => x.Id);
+                    table.PrimaryKey("PK_student", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_person_section_SectionId",
+                        name: "FK_student_person_PersonId",
+                        column: x => x.PersonId,
+                        principalSchema: "dbo",
+                        principalTable: "person",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_student_section_SectionId",
                         column: x => x.SectionId,
                         principalSchema: "dbo",
                         principalTable: "section",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "subject_load",
+                schema: "dbo",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SectionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SubjectId = table.Column<int>(type: "int", nullable: false),
+                    FacultyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_subject_load", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_subject_load_person_FacultyId",
+                        column: x => x.FacultyId,
+                        principalSchema: "dbo",
+                        principalTable: "person",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_subject_load_section_SectionId",
+                        column: x => x.SectionId,
+                        principalSchema: "dbo",
+                        principalTable: "section",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_subject_load_subject_SubjectId",
+                        column: x => x.SubjectId,
+                        principalSchema: "dbo",
+                        principalTable: "subject",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -135,10 +192,10 @@ namespace grading_tab.infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_assessment_result_person_StudentId",
+                        name: "FK_assessment_result_student_StudentId",
                         column: x => x.StudentId,
                         principalSchema: "dbo",
-                        principalTable: "person",
+                        principalTable: "student",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -158,49 +215,14 @@ namespace grading_tab.infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "subject_load",
-                schema: "dbo",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FacultyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SectionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SubjectId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_subject_load", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_subject_load_person_FacultyId",
-                        column: x => x.FacultyId,
-                        principalSchema: "dbo",
-                        principalTable: "person",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_subject_load_section_SectionId",
-                        column: x => x.SectionId,
-                        principalSchema: "dbo",
-                        principalTable: "section",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_subject_load_subject_SubjectId",
-                        column: x => x.SubjectId,
-                        principalSchema: "dbo",
-                        principalTable: "subject",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "meeting",
                 schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TypeId = table.Column<int>(type: "int", nullable: false),
-                    StartTime = table.Column<int>(type: "int", nullable: false),
-                    EndTime = table.Column<int>(type: "int", nullable: false),
+                    StartTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    EndTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     Day = table.Column<int>(type: "int", nullable: false),
                     SubjectLoadId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
@@ -220,6 +242,20 @@ namespace grading_tab.infrastructure.Migrations
                         principalSchema: "dbo",
                         principalTable: "subject_load",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.InsertData(
+                schema: "dbo",
+                table: "assessment_type",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Attendance" },
+                    { 2, "Participation" },
+                    { 3, "Assignment" },
+                    { 4, "Project - Completion" },
+                    { 5, "Project - Delivery" },
+                    { 6, "Major Exam" }
                 });
 
             migrationBuilder.InsertData(
@@ -298,16 +334,15 @@ namespace grading_tab.infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_person_Number",
+                name: "IX_student_PersonId",
                 schema: "dbo",
-                table: "person",
-                column: "Number",
-                unique: true);
+                table: "student",
+                column: "PersonId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_person_SectionId",
+                name: "IX_student_SectionId",
                 schema: "dbo",
-                table: "person",
+                table: "student",
                 column: "SectionId");
 
             migrationBuilder.CreateIndex(
@@ -352,6 +387,10 @@ namespace grading_tab.infrastructure.Migrations
                 schema: "dbo");
 
             migrationBuilder.DropTable(
+                name: "student",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
                 name: "term",
                 schema: "dbo");
 
@@ -368,11 +407,11 @@ namespace grading_tab.infrastructure.Migrations
                 schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "subject",
+                name: "section",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "section",
+                name: "subject",
                 schema: "dbo");
         }
     }

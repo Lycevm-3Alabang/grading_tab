@@ -37,7 +37,7 @@ public class ISubjectLoadRepositoryTests
         //Act
         mockRepository.Object.Create(subjectLoad);
         await mockRepository.Object.UnitOfWork.SaveChangesAsync(default);
-        var meeting = new Meeting(1, 7, 10, DayOfWeek.Saturday);
+        var meeting = new Meeting(1, DateTime.Now, DateTime.Now.AddHours(3), DayOfWeek.Saturday);
         subjectLoad.AddMeeting(meeting);
         var updatedSubjectLoad = mockRepository.Object.Update(subjectLoad);
         await mockRepository.Object.UnitOfWork.SaveChangesAsync(default);

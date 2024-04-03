@@ -1,5 +1,6 @@
 
 using grading_tab.domain.AggregateModels.SectionAggregate;
+using grading_tab.domain.AggregateModels.SubjectLoadAggregate;
 using grading_tab.infrastructure.Repositories;
 using WebApplication1;
 
@@ -16,6 +17,7 @@ builder.Services
     .AddControllers();
 
 builder.Services.AddScoped(typeof(ISectionRepository), typeof(SectionRepository));
+builder.Services.AddScoped(typeof(ISubjectLoadRepository), typeof(SubjectLoadRepository));
     
 var app = builder.Build();
 var swaggerUrl = "/swagger/V1/swagger.json";
