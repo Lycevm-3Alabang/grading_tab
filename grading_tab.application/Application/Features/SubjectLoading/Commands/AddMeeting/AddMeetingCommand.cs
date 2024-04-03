@@ -31,7 +31,12 @@ public class AddMeetingCommandHandler(ISubjectLoadRepository subjectLoadReposito
     public async Task<Guid> Handle(AddMeetingCommand request, CancellationToken cancellationToken)
     {
         var subjectLoad = await subjectLoadRepository.GetByIdAsync(request.SubjectLoadId);
-
-        return Guid.NewGuid();
+        var meeting = new Meeting(request.TypeId,
+            new DateTimeOffset(DateOnly.MinValue, new TimeOnly(request.StartTime, 0, 0),TimeSpan.Zero),
+            new DateTimeOffset(DateOnly.MinValue, new TimeOnly(request.EndTime, 0, 0),TimeSpan.Zero), request.Day);
+        subjectLoad!.AddMeeting(meeting);
+        subjectLoadRepository.Update(subjectLoad);
+        await subjectLoadRepository.UnitOfWork.SaveChangesAsync(CancellationToken.None);
+        return meeting.Id;
     }
 }

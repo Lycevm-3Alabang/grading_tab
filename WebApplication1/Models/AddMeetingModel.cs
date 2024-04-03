@@ -4,9 +4,6 @@ namespace WebApplication1.Models;
 
 public record AddMeetingModel
 {
-    [JsonPropertyName("subject_load_id")]
-    [JsonRequired]
-    public Guid? SubjectLoadId { get; init; }
     [JsonPropertyName("meeting_type_id")]
     [JsonRequired]
     public int MeetingTypeId { get; init; }
