@@ -5,12 +5,12 @@ using grading_tab.infrastructure;
 using grading_tab.infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Shouldly;
+#pragma warning disable CS8634 // The type cannot be used as type parameter in the generic type or method. Nullability of type argument doesn't match 'class' constraint.
 
 namespace grading_tab.infrastructure_tests.Functional_Tests;
 
 public class SubjectLoadRepositoryTest
 {
-    private readonly GradingTabContext _dbContext;
     private static async Task<GradingTabContext> CreateInMemoryDbContext()
     {
         var dbContextOptions = new DbContextOptionsBuilder<GradingTabContext>()
@@ -81,14 +81,14 @@ public class SubjectLoadRepositoryTest
         var section = context.Sections.AsNoTracking().First();
         var meetingType = context.MeetingTypes.AsNoTracking().First();
         var repository = new SubjectLoadRepository(context);
-        var startTime = new DateTime(DateOnly.FromDateTime(DateTime.Now), new TimeOnly(7, 0, 0));
-        var endTime = new DateTime(DateOnly.FromDateTime(DateTime.Now), new TimeOnly(10, 0, 0));
+        var startTime = new DateTimeOffset(DateOnly.FromDateTime(DateTime.Now), new TimeOnly(7, 0, 0), TimeSpan.Zero);
+        var endTime = new DateTimeOffset(DateOnly.FromDateTime(DateTime.Now), new TimeOnly(10, 0, 0), TimeSpan.Zero);
 
         //Act
         var created = repository.Create(new SubjectLoad(faculty.Id, section.Id, Subject.Seed().First().Id));
         await repository.UnitOfWork.SaveEntitiesAsync();
         var result = await repository.GetByIdAsync(created.Id);
-        result!.AddMeeting(new Meeting(meetingType.Id,startTime,endTime,DayOfWeek.Saturday));
+        result!.AddMeeting(new Meeting(meetingType!.Id,startTime,endTime,DayOfWeek.Saturday));
         repository.Update(result);
         await repository.UnitOfWork.SaveChangesAsync(default);
 

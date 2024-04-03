@@ -8,6 +8,7 @@ namespace grading_tab.domain.AggregateModels.SubjectLoadAggregate
         SubjectLoad Update(SubjectLoad subjectLoad);
         Task<SubjectLoad?> GetByIdAsync(Guid id);
         Task<IEnumerable<SubjectLoad>> GetAllAsync();
+        Task<MeetingType?> GetMeetingTypeByIdAsync(int id);
     }
     
 }

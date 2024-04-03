@@ -25,7 +25,7 @@ namespace grading_tab.infrastructure
         public DbSet<Student> Students { get; set; }
         public DbSet<Meeting> Meetings { get; set; }
         public DbSet<Subject> Subjects { get; set; }
-        public DbSet<MeetingType> MeetingTypes { get; set; }
+        public DbSet<MeetingType?> MeetingTypes { get; set; }
         public DbSet<AssessmentType> AssessmentTypes { get; set; }
         public DbSet<Term> Terms { get; set; }
 

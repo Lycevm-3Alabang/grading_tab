@@ -84,7 +84,7 @@ public class SectionRepositoryTests
         var repository = new SectionRepository(context);
         var sectionId = ((await context.Sections.AsNoTracking().FirstOrDefaultAsync())!).Id;
         var person = await context.People.AsNoTracking().FirstOrDefaultAsync(x => x.LastName == "Gosling");
-        var student = new Student("9999-99", "BSIT", person.Id);
+        var student = new Student("9999-99", "BSIT", person!.Id);
 
         var updated = await repository.GetByIdAsync(sectionId);
         updated?.AddStudent(student);

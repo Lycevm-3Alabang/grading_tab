@@ -55,5 +55,6 @@ public class ISubjectLoadRepositoryTests
         mockRepository.Verify(x => x.Create(subjectLoad),Times.Once);
         mockRepository.Verify(x => x.Update(subjectLoad),Times.Once);
         mockRepository.Verify(c => c.UnitOfWork.SaveChangesAsync(default),Times.AtLeast(2));
+        mockRepository.Verify(x => x.GetMeetingTypeByIdAsync(1),Times.AtMostOnce);
     }
 }

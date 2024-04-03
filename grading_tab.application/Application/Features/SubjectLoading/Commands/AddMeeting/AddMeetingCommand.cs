@@ -31,9 +31,14 @@ public class AddMeetingCommandHandler(ISubjectLoadRepository subjectLoadReposito
     public async Task<Guid> Handle(AddMeetingCommand request, CancellationToken cancellationToken)
     {
         var subjectLoad = await subjectLoadRepository.GetByIdAsync(request.SubjectLoadId);
-        var meeting = new Meeting(request.TypeId,
+
+        var type = await subjectLoadRepository.GetMeetingTypeByIdAsync(request.TypeId);
+        if (type == null) throw new KeyNotFoundException(nameof(request.TypeId));
+        
+        var meeting = new Meeting(type.Id,
             new DateTimeOffset(DateOnly.MinValue, new TimeOnly(request.StartTime, 0, 0),TimeSpan.Zero),
             new DateTimeOffset(DateOnly.MinValue, new TimeOnly(request.EndTime, 0, 0),TimeSpan.Zero), request.Day);
+        
         subjectLoad!.AddMeeting(meeting);
         subjectLoadRepository.Update(subjectLoad);
         await subjectLoadRepository.UnitOfWork.SaveChangesAsync(CancellationToken.None);

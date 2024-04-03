@@ -567,3 +567,5 @@ $RECYCLE.BIN/
 .idea/.idea.grading_tab/.idea/vcs.xml
 .idea/.idea.grading_tab/.idea/indexLayout.xml
 WebApplication1/WebApplication1.csproj.user
+*.xml
+/.idea

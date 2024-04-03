@@ -25,6 +25,11 @@ namespace grading_tab.infrastructure.Repositories
             return subjectLoads;
         }
 
+        public async Task<MeetingType?> GetMeetingTypeByIdAsync(int id)
+        {
+            return await _dbContext.MeetingTypes.AsNoTracking().SingleOrDefaultAsync(x => x!.Id == id);
+        }
+
         public async Task<SubjectLoad?> GetByIdAsync(Guid id)
         {
             var subjectLoad = await _dbContext.SubjectLoads
