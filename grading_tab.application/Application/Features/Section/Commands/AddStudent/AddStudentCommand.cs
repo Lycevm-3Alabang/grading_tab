@@ -10,7 +10,7 @@ public class AddStudentCommand : IRequest<Guid?>
 
     public string? LastName { get; init; }
 
-    public string? Middlename { get; init; }
+    public string? MiddleName { get; init; }
 
     public string? NameSuffix { get; init; }
 

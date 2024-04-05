@@ -14,7 +14,7 @@ public record CommandResult
     public bool IsSuccess { get; }
     public object[] Data { get; }
 
-    private static CommandResult Create(bool isSuccess, string errorMessage, object[] data = null)
+    private static CommandResult Create(bool isSuccess, string errorMessage, object[] data = null!)
     {
         return new CommandResult(isSuccess, errorMessage, data);
     }

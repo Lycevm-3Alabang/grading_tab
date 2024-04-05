@@ -18,7 +18,7 @@ public class AddStudentCommandHandler(ISectionRepository repository, ILogger<Add
         if (section == null) throw new SectionNotFoundException();
         
         var student = new Student(request.Number, request.Course,
-            new Person(request.FirstName, request.LastName, request.Middlename, request.NameSuffix));
+            new Person(request.FirstName, request.LastName, request.MiddleName, request.NameSuffix));
 
         section.AddStudent(student);
 
