@@ -1,18 +1,16 @@
 ﻿using grading_tab.domain.SeedWork;
 
-namespace grading_tab.domain.AggregateModels.SubjectLoadAggregate
+namespace grading_tab.domain.AggregateModels.SubjectLoadAggregate;
+
+public class Subject : Enumeration
 {
-    public class Subject : Enumeration
+    public Subject(int id, string name) : base(id, name)
     {
-        public Subject(int id, string name) : base(id, name)
-        {
         }
 
-        public static IEnumerable<Subject> Seed() =>
-            [
-                new(1,"CE ELECTIVE 2"),
-                new(2,"IT ELECTIVE 3"),
-            ];
-    }
-    
+    public static IEnumerable<Subject> Seed() =>
+    [
+        new(1,"CE ELECTIVE 2"),
+        new(2,"IT ELECTIVE 3"),
+    ];
 }

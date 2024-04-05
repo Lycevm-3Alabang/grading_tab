@@ -14,7 +14,7 @@ public static class SectionModelExtensions
         SectionId = sectionId,
         FirstName = model.FirstName,
         LastName = model.LastName,
-        Middlename = model.MiddleName,
+        MiddleName = model.MiddleName,
         Number = model.Number,
         NameSuffix = model.NameSuffix
     };

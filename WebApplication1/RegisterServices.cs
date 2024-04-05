@@ -1,6 +1,8 @@
 using System.Reflection;
 using FluentValidation;
 using grading_tab.application.Application.Behaviors;
+using grading_tab.application.Application.Common;
+using grading_tab.application.Application.Common.Interfaces;
 using grading_tab.application.Application.Features.Section.Commands.AddSection;
 using grading_tab.infrastructure;
 using MediatR;
@@ -15,7 +17,6 @@ public static class RegisterServices
     {
         services.AddDbContext<GradingTabContext>(options =>
             {
-                options.UseSqlServer(connectionString);
                 options.UseSqlServer(connectionString,
                     sqlOptions =>
                     {
@@ -24,6 +25,8 @@ public static class RegisterServices
                     });
             } //Showing explicitly that the DbContext is shared across the HTTP request scope (graph of objects started in the HTTP request)
         );
+
+        services.AddSingleton<IDbConnectionFactory>(x => new DbConnectionFactory(connectionString));
 
         return services;
     }
