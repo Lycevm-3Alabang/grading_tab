@@ -41,7 +41,7 @@ public class SubjectLoad : Entity, IAggregateRoot
     public void RemoveMeeting(Meeting meeting)
     {
             _meetings!.Remove(meeting);
-        }
+    }
 
     public Guid GetFacultyId() => _facultyId;
     public int GetSubjectId() => _subjectId;
