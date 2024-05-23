@@ -9,4 +9,6 @@ public interface ISubjectLoadRepository : IRepository<SubjectLoad>
     Task<SubjectLoad?> GetByIdAsync(Guid id);
     Task<IEnumerable<SubjectLoad>> GetAllAsync();
     Task<MeetingType?> GetMeetingTypeByIdAsync(int id);
+    IEnumerable<Subject> GetSubjects();
+
 }
